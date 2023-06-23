@@ -1,7 +1,12 @@
 #include <stdio.h>
 #include "interface.h"
 
-char opcoes[][51] = {"Anexar",  "Pesquisar", "Fechar\n" };
+/* title, appeared, type, rank, numberOfUsers, creators, website, originCommunity
+ * country, reference, wikipedia.summary
+ *
+ * */
+
+char opcoes[][51] = {"Anexar",  "Pesquisar", "Fechar" };
 int x[] = {32, 56, 82};
 int y[] = {24, 24,  24};
 
@@ -30,8 +35,8 @@ void TelaPrincipal () {
     GotoXY(30, 17); printf("             ;-,,,,,___    \"\"`\"--..._         ,' ; ;");
     GotoXY(30, 18); printf("             ;         \"\"\"\"``---...__\"\"-...,-' ,'  ;");
     GotoXY(30, 19); printf("             ;                       \"`-....,-'   /");
-    GotoXY(30, 20); printf("             `-._     _-------_                 ,'");
-    GotoXY(30, 21); printf("                 \"`--'\"\"\"\"\"\"\"\"\"``--.. By R&B ,,'");
+    GotoXY(30, 20); printf("             `-._     _-------_   By T&B |_|>   ,'");
+    GotoXY(30, 21); printf("                 \"`--'\"\"\"\"\"\"\"\"\"``--..        ,,'");
     GotoXY(30, 22); printf("                                     \"\"`---'\"");
 }
 
