@@ -61,6 +61,12 @@ build CMakeFiles/Code_Wiki.dir/interface.c.obj: C_COMPILER__Code_Wiki_Debug C$:/
   OBJECT_DIR = CMakeFiles\Code_Wiki.dir
   OBJECT_FILE_DIR = CMakeFiles\Code_Wiki.dir
 
+build CMakeFiles/Code_Wiki.dir/dados.c.obj: C_COMPILER__Code_Wiki_Debug C$:/Users/brant/OneDrive/Documentos/projetos/Code-Wiki/dados.c || cmake_object_order_depends_target_Code_Wiki
+  DEP_FILE = CMakeFiles\Code_Wiki.dir\dados.c.obj.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu99
+  OBJECT_DIR = CMakeFiles\Code_Wiki.dir
+  OBJECT_FILE_DIR = CMakeFiles\Code_Wiki.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Code_Wiki
@@ -69,7 +75,7 @@ build CMakeFiles/Code_Wiki.dir/interface.c.obj: C_COMPILER__Code_Wiki_Debug C$:/
 #############################################
 # Link the executable Code_Wiki.exe
 
-build Code_Wiki.exe: C_EXECUTABLE_LINKER__Code_Wiki_Debug CMakeFiles/Code_Wiki.dir/main.c.obj CMakeFiles/Code_Wiki.dir/interface.c.obj
+build Code_Wiki.exe: C_EXECUTABLE_LINKER__Code_Wiki_Debug CMakeFiles/Code_Wiki.dir/main.c.obj CMakeFiles/Code_Wiki.dir/interface.c.obj CMakeFiles/Code_Wiki.dir/dados.c.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Code_Wiki.dir
