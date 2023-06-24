@@ -1,10 +1,6 @@
 #include <stdio.h>
 #include "interface.h"
-
-/* title, appeared, type, rank, numberOfUsers, creators, website, originCommunity
- * country, reference, wikipedia.summary
- *
- * */
+#include "dados.h"
 
 char opcoes[][51] = {"Anexar",  "Pesquisar", "Fechar" };
 int x[] = {32, 56, 82};
@@ -46,7 +42,7 @@ int main() {
     do {
         TelaPrincipal();
         escolha = Menu(opcoes, x, y, escolha, 3);
-        if(escolha == 0);
+        if(escolha == 0) LerArquivo();
         if(escolha == 1);
         if(escolha == 2)
             break;
