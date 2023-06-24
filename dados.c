@@ -10,7 +10,7 @@ void LerArquivo() {
     char *sub;
     int campo = 0, i = 0, j;
 
-    FILE *fp = fopen("pldb.csv", "r");
+    FILE *fp = fopen("C:\\Users\\brant\\OneDrive\\Documentos\\projetos\\Code-Wiki\\pldb.csv", "r");
     if(fp == NULL) {
         printf("Nao abriu pldb.csv\n");
         exit(1);
