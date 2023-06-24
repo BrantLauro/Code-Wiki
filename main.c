@@ -42,7 +42,10 @@ int main() {
     do {
         TelaPrincipal();
         escolha = Menu(opcoes, x, y, escolha, 3);
-        if(escolha == 0) LerArquivo();
+        if(escolha == 0) {
+            LerArquivo();
+            system("PAUSE");
+        }
         if(escolha == 1);
         if(escolha == 2)
             break;
