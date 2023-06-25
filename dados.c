@@ -93,7 +93,7 @@ void LerArquivo() {
         }
         i++;
     }
-    for(j = 0; j < 10; j++)
+    for(j = 0; j < 4817; j++)
     {
         printf("%s\n %d\n %s\n %d\n %d\n %s\n %s\n %s\n %s\n %s\n %s\n\n",
                D[j].Title, D[j].Year, D[j].Type, D[j].Rank, D[j].Users,

@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/brant/OneDrive/Documentos/projetos/Code-Wiki
+# Install script for directory: H:/Codigos/Linguagem C/Code-Wiki
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/brant/OneDrive/Documentos/projetos/Code-Wiki/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "H:/Codigos/Linguagem C/Code-Wiki/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
