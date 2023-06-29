@@ -26,6 +26,8 @@ enum DOS_COLORS {
     LIGHT_RED, LIGHT_MAGENTA, YELLOW, WHITE
 };
 
+char* word_wrap(char* buffer, char* string, int line_width);
+int Selecao(int x, int y, int Largura, int Altura, char *Opcoes[], int n);
 int GetTecla();
 void GotoXY(int x, int y);
 void TextColoreback(int letras, int fundo);

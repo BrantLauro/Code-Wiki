@@ -1,4 +1,84 @@
 #include "interface.h"
+#include <ctype.h>
+
+char* word_wrap(char* buffer, char* string, int line_width) {
+    int i = 0;
+    int k, counter;
+    while (i < strlen(string)) {
+        // copy string until the end of the line is reached
+        for (counter = 1; counter <= line_width; counter++) {
+            // check if end of string reached
+            if (i == strlen(string)) {
+                buffer[i] = 0;
+                return buffer;
+            }
+            buffer[i] = string[i];
+            // check for newlines embedded in the original input
+            // and reset the index
+            if (buffer[i] == '\n') {
+                counter = 1;
+            }
+            i++;
+        }
+        // check for whitespace
+        if (isspace(string[i])) {
+            buffer[i] = '\n';
+            i++;
+        } else {
+            // check for nearest whitespace back in string
+            for (k = i; k > 0; k--) {
+                if (isspace(string[k])) {
+                    buffer[k] = '\n';
+                    // set string index back to character after this one
+                    i = k + 1;
+                    break;
+                }
+            }
+        }
+    }
+    buffer[i] = 0;
+    return buffer;
+}
+
+int Selecao(int x, int y, int Largura, int Altura, char *Opcoes[], int n) {
+    int i, Opcao = 0, Tecla, Primeiro = 0;
+    TextColoreback(LIGHT_GRAY, BLACK);
+    for (i = 0; i < Altura && i < n; i++) {
+        GotoXY(x, y + i);
+        printf("%*s", -Largura, Opcoes[i + Primeiro]);
+    }
+    do {
+        TextColoreback(LIGHT_GRAY, BLACK);
+        GotoXY(x, y + Opcao - Primeiro);
+        printf("%*s", -Largura, Opcoes[Opcao]);
+        Tecla = GetTecla();
+        TextColoreback(LIGHT_GRAY, BLACK);
+        GotoXY(x, y + Opcao - Primeiro);
+        printf("%*s", -Largura, Opcoes[Opcao]);
+        if(Tecla == TEC_ESQ) Opcao--;
+        if(Tecla == TEC_DIR) Opcao++;
+        if(Tecla == TEC_CIMA) Opcao--;
+        if(Tecla == TEC_BAIXO) Opcao++;
+        if(Tecla == TEC_ENTER)
+        {
+            return Opcao;
+        }
+        if(Opcao < 0) Opcao = 0;//n - 1;
+        if(Opcao >= n) Opcao = n-1;//0;
+        if(Opcao - Primeiro < 0 || Opcao >= Altura + Primeiro)
+        {
+            if(Opcao - Primeiro < 0) Primeiro--;
+            else Primeiro++;
+            for (i = 0; i < Altura && i < n; i++)
+            {
+                GotoXY(x, y + i);
+                printf("%*s", -Largura, Opcoes[i + Primeiro]);
+            }
+        }
+    }
+    while(Tecla != TEC_ESC);
+    return -1;
+}
 
 void GotoXY(int x, int y){
     COORD coord;
