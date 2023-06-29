@@ -3,10 +3,6 @@
 #include "interface.h"
 #include "dados.h"
 
-char opcoes[][51] = {"Anexar",  "Pesquisar", "Fechar" };
-int x[] = {32, 56, 82};
-int y[] = {24, 24,  24};
-
 void TelaPrincipal () {
     TextColoreback(LIGHT_GRAY, BLACK);
     Borda(0, 0, 118, 28, 1, 0);
@@ -18,9 +14,8 @@ void TelaPrincipal () {
     GotoXY(17, 6); printf("MM.        8M     M8 8MI    MM 8M\"\"\"\"\"\"         `MM A'  `MM A'    MM    MM;Mm     MM  ");
     GotoXY(17, 7); printf("`Mb.     ,'YA.   ,A9 `Mb    MM YM.    ,          :MM;    :MM;     MM    MM `Mb.   MM ");
     GotoXY(17, 8); printf("  `\"bmmmd'  `Ybmd9'   `Wbmd\"MML.`Mbmmd'           VF      VF    .JMML..JMML. YA..JMML.");
-    Borda(27, 23, 15, 2, 0,0);
-    Borda(52, 23, 15, 2, 0,0);
-    Borda(77, 23, 15, 2, 0,0);
+    Borda(15, 23, 90, 2, 0,0);
+    GotoXY(16, 24); printf("Pesquisa: ");
     GotoXY(30, 9); printf(" ,-\"_,,--'\"\"");
     GotoXY(30, 10); printf("; ,'               .,------,....___");
     GotoXY(30, 11); printf("; ;               /       ;        \"\"\"`---.._");
@@ -37,20 +32,28 @@ void TelaPrincipal () {
     GotoXY(30, 22); printf("                                     \"\"`---'\"");
 }
 
-
 int main() {
     int escolha = 0;
+    char Title[51];
+    Dados* D;
     do {
         TelaPrincipal();
-        escolha = Menu(opcoes, x, y, escolha, 3);
+        //escolha = Menu(opcoes, x, y, escolha, 3);
         if(escolha == 0) {
             LerArquivo();
-            system("PAUSE");
+            GotoXY(26, 24); scanf(" %[^\n]", Title);
+            if(strcmp(Title, "\\exit") == 0) break;
+            D = Busca(Title);
+            if(D != NULL) {
+                Imprimir(*D);
+            } else {
+                Borda(13, 8, 91, 10, 1, 0);
+                Borda(28, 9, 60, 2, 0, 0);
+                GotoXY(48, 10); printf("VALOR NAO ENCONTRADO!!!");
+                GotoXY(36, 15); system("PAUSE");
+            }
         }
-        if(escolha == 1);
-        if(escolha == 2)
-            break;
-    } while(escolha != -1);
+    } while(1);
     GotoXY(0, 45);
     return  0;
 }

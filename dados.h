@@ -1,5 +1,6 @@
 #ifndef CODE_WIKI_DADOS_H
 #define CODE_WIKI_DADOS_H
+#define TAM 6011
 
 struct dados {
     char Title[51];
@@ -17,6 +18,13 @@ struct dados {
 typedef struct dados Dados;
 
 void LerArquivo();
+void Inicializar(Dados H[]);
+int HashString(char str[]);
+int Hash(int chave);
+void Inserir(Dados H[], Dados P);
+Dados* Busca(char Chave[]);
+void Imprimir(Dados D);
+//void TelaPesquisa();
 /* title, appeared, type, rank, numberOfUsers, creators, website, originCommunity
  * country, reference, wikipedia.summary */
 
