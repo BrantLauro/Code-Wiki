@@ -1,3 +1,3 @@
-C:/Users/brant/OneDrive/Documentos/projetos/Code-Wiki/cmake-build-debug/CMakeFiles/Code_Wiki.dir
-C:/Users/brant/OneDrive/Documentos/projetos/Code-Wiki/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/brant/OneDrive/Documentos/projetos/Code-Wiki/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+H:/Codigos/Linguagem C/Code-Wiki/cmake-build-debug/CMakeFiles/Code_Wiki.dir
+H:/Codigos/Linguagem C/Code-Wiki/cmake-build-debug/CMakeFiles/edit_cache.dir
+H:/Codigos/Linguagem C/Code-Wiki/cmake-build-debug/CMakeFiles/rebuild_cache.dir

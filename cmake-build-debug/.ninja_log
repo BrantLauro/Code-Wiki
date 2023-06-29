@@ -1,5 +1,5 @@
 # ninja log v5
-3	136	7093493211466215	CMakeFiles/Code_Wiki.dir/dados.c.obj	e0eea39d5fbc46a7
-0	1305	7093474404799736	CMakeFiles/Code_Wiki.dir/main.c.obj	7e01101a8ad4282b
-7	1321	7093474404969968	CMakeFiles/Code_Wiki.dir/interface.c.obj	268694dc4d465931
-138	279	7093493212848104	Code_Wiki.exe	4be3b92ab59af6cb
+2	82	7093542264255357	CMakeFiles/Code_Wiki.dir/dados.c.obj	c335e5beadb5dea3
+7	854	7093542014348213	CMakeFiles/Code_Wiki.dir/main.c.obj	383b53e424f1ad51
+2	857	7093542014358234	CMakeFiles/Code_Wiki.dir/interface.c.obj	da674757d5b59681
+82	181	7093542265206216	Code_Wiki.exe	4be3b92ab59af6cb
