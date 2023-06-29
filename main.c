@@ -3,6 +3,8 @@
 #include "interface.h"
 #include "dados.h"
 
+//teste
+
 void TelaPrincipal () {
     TextColoreback(LIGHT_GRAY, BLACK);
     Borda(0, 0, 118, 28, 1, 0);
