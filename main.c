@@ -35,27 +35,26 @@ void TelaPrincipal () {
 }
 
 int main() {
-    int escolha = 0;
     char Title[51];
     Dados* D;
+    LerArquivo();
+    AbrirArquivo();
     do {
         TelaPrincipal();
-        //escolha = Menu(opcoes, x, y, escolha, 3);
-        if(escolha == 0) {
-            LerArquivo();
-            GotoXY(26, 24); scanf(" %[^\n]", Title);
-            if(strcmp(Title, "\\exit") == 0) break;
-            D = Busca(Title);
-            if(D != NULL) {
-                Imprimir(*D);
-            } else {
-                Borda(13, 8, 91, 10, 1, 0);
-                Borda(28, 9, 60, 2, 0, 0);
-                GotoXY(48, 10); printf("VALOR NAO ENCONTRADO!!!");
-                GotoXY(36, 15); system("PAUSE");
-            }
+        GravarArquivo();
+        GotoXY(26, 24); scanf(" %[^\n]", Title);
+        if(strcmp(Title, "\\exit") == 0) break;
+        D = Busca(Title);
+        if(D != NULL) {
+            Imprimir(*D);
+        } else {
+            Borda(13, 8, 91, 10, 1, 0);
+            Borda(28, 9, 60, 2, 0, 0);
+            GotoXY(48, 10); printf("VALOR NAO ENCONTRADO!!!");
+            GotoXY(36, 15); system("PAUSE");
         }
     } while(1);
+    FecharArquivo();
     GotoXY(0, 45);
     return  0;
 }

@@ -17,7 +17,16 @@ struct dados {
 };
 typedef struct dados Dados;
 
+// Definição do nó da lista encadeada
+typedef struct No {
+    Dados dados;
+    struct No* prox;
+} No;
+
 void LerArquivo();
+void AbrirArquivo();
+void FecharArquivo();
+void GravarArquivo();
 void Inicializar(Dados H[]);
 int HashString(char str[]);
 int Hash(int chave);

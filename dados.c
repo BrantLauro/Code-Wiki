@@ -5,13 +5,90 @@
 #include "interface.h"
 
 Dados D[100000];
-Dados H[TAM];
+No* H[TAM];
+FILE *fp;
 
+void AbrirArquivo() {
+    Dados Dado;
+    fp = fopen("dados.txt","rb+");
+    if(fp == NULL){
+        /*strcpy(Dado.Title, "");
+        Dado.Year = 0;
+        strcpy(Dado.Type, "");
+        Dado.Rank = 0;
+        Dado.Users = 0;
+        strcpy(Dado.Creator, "");
+        strcpy(Dado.Website, "");
+        strcpy(Dado.Origin, "");
+        strcpy(Dado.Country, "");
+        strcpy(Dado.Reference, "");
+        strcpy(Dado.Summary, "");*/
+        fp = fopen("dados.txt","wb+");
+        if(fp == NULL){
+            printf("[ERROR] O programa nao conseguiu abrir o arquivo.");
+            exit(1);
+        }
+        /*for(int i = 0; i < 6011; i++) {
+            GravarArquivo();
+        }*/
+    }
+}
+void InserirNo(Dados* D) {
+    // Calcula o hash do campo "nome"
+    int posicao = HashString(D -> Title);
+    // Aloca memória para o novo nó da lista
+    No* novoNo = (No*)malloc(sizeof(No));
+    if (novoNo == NULL) {
+        printf("Erro ao alocar memória.\n");
+        return;
+    }
+    strcpy(novoNo->dados.Title, D -> Title);
+    novoNo->dados.Year = D -> Year;
+    strcpy(novoNo->dados.Type, D -> Type);
+    novoNo->dados.Rank = D -> Rank;
+    novoNo -> dados.Users =  D -> Users;
+    strcpy(novoNo->dados.Creator, D -> Creator);
+    strcpy(novoNo->dados.Website, D -> Website);
+    strcpy(novoNo->dados.Origin, D -> Origin);
+    strcpy(novoNo->dados.Country, D -> Country);
+    strcpy(novoNo->dados.Reference, D -> Reference);
+    strcpy(novoNo->dados.Summary, D -> Summary);
+    novoNo->prox = H[posicao];
+    H[posicao] = novoNo;
+}
+
+void GravarArquivo() {
+    //AbrirArquivo(fp);
+
+    for (int i = 0; i < TAM; i++) {
+        No* atual = H[i];
+        while (atual != NULL) {
+            fseek(fp, i, SEEK_END);
+            fwrite(&(atual->dados), sizeof(Dados), 1, fp);
+            atual = atual->prox;
+        }
+    }
+
+    fflush(fp);
+}
+
+/*
+void GravarArquivo(Dados Dado, int pos) {
+    Dados C;
+    fseek(fp, pos, SEEK_END);//Posiciona no fim do arquivo
+    fread(&C, sizeof(Dados), 1, fp);
+    if(strcmp(C.Title, "") == 0) printf("Deu Certo! %d");
+    fwrite(&Dado, sizeof(Dados), 1, fp);//Grava
+    printf("%d", C);
+    fflush(fp);
+}*/
+
+/*
 void Inicializar(Dados H[]) {
     int i;
     for(i = 0; i < TAM; i++)
        strcpy(H[i].Title, "");
-}
+}*/
 
 int HashString(char str[]) {
     int i, TamS = strlen(str);
@@ -35,13 +112,20 @@ void Inserir(Dados H[], Dados P){
 
 Dados* Busca(char Chave[]){
     int id = HashString(Chave);
-    while(strlen(H[id].Title) > 0){
-        if(strcmp(H[id].Title, Chave) == 0)
-            return &H[id];
-        else
-            id = Hash(id + 1);
+    fseek(fp, id * sizeof(No), SEEK_SET);
+    No* lista = NULL;
+    fread(&lista, sizeof(No), 1, fp); // Lê o ponteiro da lista encadeada correspondente à posição hash
+    while (lista != NULL) {
+        if (strcmp(lista->dados.Title, Chave) == 0) {
+            return &(lista->dados);
+        }
+        lista = lista->prox; // Avança para o próximo nó da lista
     }
     return NULL;
+}
+
+void FecharArquivo() {
+    fclose(fp);
 }
 
 void Imprimir(Dados D) {
@@ -72,17 +156,17 @@ void Imprimir(Dados D) {
 }
 
 void LerArquivo() {
-    Inicializar(H);
+    //Inicializar(H);
     char linha[100000], texto[100000];
     //char *sub, *sub2;
     int campo = 0, i = 0, j, tam, t, a, aspas;
-    FILE *fp = fopen("pldb.csv", "r");
-    if(fp == NULL) {
+    FILE *fporigin = fopen("pldb.csv", "r");
+    if(fporigin == NULL) {
         printf("Nao abriu pldb.csv\n");
         exit(1);
     }
-    fscanf (fp, " %[^\n]", linha);
-    while (fscanf (fp, " %[^\n]", linha)!=EOF) {
+    fscanf (fporigin, " %[^\n]", linha);
+    while (fscanf (fporigin, " %[^\n]", linha)!=EOF) {
         campo = 0;
         texto[0] = 0;
         tam = strlen(linha);
@@ -137,8 +221,10 @@ void LerArquivo() {
             }
             campo++;
         }
-        Inserir(H, D[i]);
+        //Inserir(H, D[i]);
+        //GravarArquivo();
+        InserirNo(&D[i]);
         i++;
     }
-    fclose (fp);
+    fclose (fporigin);
 }
