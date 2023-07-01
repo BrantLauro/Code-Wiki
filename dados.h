@@ -1,6 +1,6 @@
 #ifndef CODE_WIKI_DADOS_H
 #define CODE_WIKI_DADOS_H
-#define TAM 6011
+#define TAM 6029
 
 struct dados {
     char Title[51];
