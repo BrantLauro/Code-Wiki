@@ -5,7 +5,7 @@
 typedef struct dados {
     char Title[51];
     int Year;
-    char Type[4];
+    char Type[10];
     int Rank;
     int Users;
     char Creator[100];
