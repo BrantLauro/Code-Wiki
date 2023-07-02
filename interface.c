@@ -5,31 +5,24 @@ char* word_wrap(char* buffer, char* string, int line_width) {
     int i = 0;
     int k, counter;
     while (i < strlen(string)) {
-        // copy string until the end of the line is reached
         for (counter = 1; counter <= line_width; counter++) {
-            // check if end of string reached
             if (i == strlen(string)) {
                 buffer[i] = 0;
                 return buffer;
             }
             buffer[i] = string[i];
-            // check for newlines embedded in the original input
-            // and reset the index
             if (buffer[i] == '\n') {
                 counter = 1;
             }
             i++;
         }
-        // check for whitespace
         if (isspace(string[i])) {
             buffer[i] = '\n';
             i++;
         } else {
-            // check for nearest whitespace back in string
             for (k = i; k > 0; k--) {
                 if (isspace(string[k])) {
                     buffer[k] = '\n';
-                    // set string index back to character after this one
                     i = k + 1;
                     break;
                 }
@@ -59,18 +52,15 @@ int Selecao(int x, int y, int Largura, int Altura, char *Opcoes[], int n) {
         if(Tecla == TEC_DIR) Opcao++;
         if(Tecla == TEC_CIMA) Opcao--;
         if(Tecla == TEC_BAIXO) Opcao++;
-        if(Tecla == TEC_ENTER)
-        {
+        if(Tecla == TEC_ENTER) {
             return Opcao;
         }
-        if(Opcao < 0) Opcao = 0;//n - 1;
-        if(Opcao >= n) Opcao = n-1;//0;
-        if(Opcao - Primeiro < 0 || Opcao >= Altura + Primeiro)
-        {
+        if(Opcao < 0) Opcao = 0;
+        if(Opcao >= n) Opcao = n-1;
+        if(Opcao - Primeiro < 0 || Opcao >= Altura + Primeiro) {
             if(Opcao - Primeiro < 0) Primeiro--;
             else Primeiro++;
-            for (i = 0; i < Altura && i < n; i++)
-            {
+            for (i = 0; i < Altura && i < n; i++) {
                 GotoXY(x, y + i);
                 printf("%*s", -Largura, Opcoes[i + Primeiro]);
             }
@@ -80,14 +70,14 @@ int Selecao(int x, int y, int Largura, int Altura, char *Opcoes[], int n) {
     return -1;
 }
 
-void GotoXY(int x, int y){
+void GotoXY(int x, int y) {
     COORD coord;
     coord.X = x;
     coord.Y = y;
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 }
 
-int GetTecla(){
+int GetTecla() {
     int ch;
     ch = getch();
     if(ch == 224){
@@ -96,7 +86,7 @@ int GetTecla(){
     return ch;
 }
 
-void TextColoreback(int letras, int fundo){/*para mudar a cor de fundo mude o background*/
+void TextColoreback(int letras, int fundo) { //para mudar a cor de fundo mude o background
     SetConsoleTextAttribute (GetStdHandle (STD_OUTPUT_HANDLE),
                              letras + (fundo << 4));
 }
@@ -108,7 +98,7 @@ void Borda(int x, int y, int largura, int altura, int tipo, int sombra){
     GotoXY(x, y); printf("%c", C[tipo][0]);
     for(i = 0; i < largura; i++) printf("%c", C[tipo][4]);
     printf("%c", C[tipo][1]);
-    for(j = 0; j < altura; j++){
+    for(j = 0; j < altura; j++) {
         GotoXY(x, y+j+1); printf("%c", C[tipo][5]);
 
         for(i = 0; i < largura; i++) printf(" ");
@@ -118,13 +108,13 @@ void Borda(int x, int y, int largura, int altura, int tipo, int sombra){
     GotoXY(x, y+altura); printf("%c", C[tipo][2]);
     for(i = 0; i < largura; i++) printf("%c", C[tipo][4]);
     printf("%c", C[tipo][3]);
-    if(sombra){
+    if(sombra) {
         GotoXY(x+1, y+altura+1);
         for(i = 0; i < largura+2; i++) printf("\xb2");
     }
 }
 
-int Menu(char opcoes[][51], int x[], int y[], int opcao, int n){
+int Menu(char opcoes[][51], int x[], int y[], int opcao, int n) {
     int i; int tecla;
     TextColoreback(LIGHT_GRAY, BLACK);
     for(i = 0; i < n; i++) {

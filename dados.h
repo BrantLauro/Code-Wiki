@@ -20,9 +20,7 @@ typedef struct dados {
 void AbrirArquivo();
 void FecharArquivo();
 void GravarArquivo(Dados D);
-void InicializarH();
 int HashString(char str[]);
-void InserirH(Dados D);
 Dados Buscar(char Chave[]);
 void Imprimir(Dados D);
 void LerArquivo();

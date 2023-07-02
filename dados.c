@@ -4,8 +4,8 @@
 #include "dados.h"
 #include "interface.h"
 
+//Dados H[TAM];
 Dados LD[1000];
-Dados H[TAM];
 FILE *fp;
 
 
@@ -77,97 +77,6 @@ Dados Buscar(char Chave[]){
     strcpy(dados.Title, "");
     return dados; // Title vazio se não encontrou.
 }
-
-/*
-
-void GravarArquivo(Dados Dado, int pos) {
-    Dados C;
-    fseek(fp, pos, SEEK_END);//Posiciona no fim do arquivo
-    fread(&C, sizeof(Dados), 1, fp);
-    if(strcmp(C.Title, "") == 0) printf("Deu Certo! %d");
-    fwrite(&Dado, sizeof(Dados), 1, fp);//Grava
-    printf("%d", C);
-    fflush(fp);
-}
-
-
-void Inicializar(Dados H[]) {
-    int i;
-    for(i = 0; i < TAM; i++)
-       strcpy(H[i].Title, "");
-}
-
-Dados* Busca(char Chave[]){
-    int id = HashString(Chave);
-    fseek(fp, id * sizeof(No), SEEK_SET);
-    No* lista = NULL;
-    fread(&lista, sizeof(No), 1, fp); // Lê o ponteiro da lista encadeada correspondente à posição hash
-    while (lista != NULL) {
-        if (strcmp(lista->dados.Title, Chave) == 0) {
-            return &(lista->dados);
-        }
-        lista = lista->prox; // Avança para o próximo nó da lista
-    }
-    return NULL;
-}
-
-int Hash(int chave){
-    return chave % TAM;
-}
-
-void Inserir(Dados H[], Dados P){
-    int id = HashString(P.Title);
-    while(strlen(H[id].Title) > 0){
-        id = Hash(id + 1);
-    }
-    H[id] = P;
-}
-
-Lista* CriarLista() {
-    Lista *l = malloc(sizeof(Lista));
-    l->ini = NULL;
-    l->tam = 0;
-    return l;
-}
-
-void InserirInicio(Dados D, Lista *lista) {
-    No *no = malloc(sizeof(No));
-    no->dado = D;
-    no->prox = lista->ini;
-    lista->ini = no;
-    lista->tam++;
-}
-
-No* BuscarNo(char Title[], No *ini) {
-    while(ini != NULL) {
-        if(strcmp(ini->dado.Title, Title) == 0)
-            return ini;
-        else
-            ini = ini->prox;
-    }
-    return NULL;
-}
-
-void InicializarH(){
-    int i;
-    for(i = 0; i < TAM; i++)
-        H[i] = CriarLista();
-}
-
-void InserirH(Dados D) {
-    int indice = HashString(D.Title);
-    InserirInicio(D, H[indice]);
-}
-
-Dados* BuscarH(char Title[]){
-    int indice = HashString(Title);
-    No *no = BuscarNo(Title, H[indice]->ini);
-    if(no)
-        return &no->dado;
-    else
-        return NULL;
-}
-*/
 
 int HashString(char str[]) {
     int i, TamS = strlen(str);
