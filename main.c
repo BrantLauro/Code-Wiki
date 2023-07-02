@@ -36,22 +36,21 @@ void TelaPrincipal () {
 
 int main() {
     char Title[51];
-    Dados* D;
-    LerArquivo();
+    Dados D;
     AbrirArquivo();
+    //LerArquivo(); // DEIXAR SEM COMENTÁRIO A PRIMEIRA VEZ QUE FOR RODAR, DEPOIS COMENTAR NOVAMENTE.
     do {
         TelaPrincipal();
-        GravarArquivo();
         GotoXY(26, 24); scanf(" %[^\n]", Title);
         if(strcmp(Title, "\\exit") == 0) break;
-        D = Busca(Title);
-        if(D != NULL) {
-            Imprimir(*D);
-        } else {
+        D = Buscar(Title);
+        if(strcmp(D.Title, "") == 0) {
             Borda(13, 8, 91, 10, 1, 0);
             Borda(28, 9, 60, 2, 0, 0);
             GotoXY(48, 10); printf("VALOR NAO ENCONTRADO!!!");
             GotoXY(36, 15); system("PAUSE");
+        } else {
+            Imprimir(D);
         }
     } while(1);
     FecharArquivo();

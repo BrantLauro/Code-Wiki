@@ -2,7 +2,7 @@
 #define CODE_WIKI_DADOS_H
 #define TAM 6029
 
-struct dados {
+typedef struct dados {
     char Title[51];
     int Year;
     char Type[4];
@@ -14,27 +14,17 @@ struct dados {
     char Country[51];
     char Reference[100];
     char Summary[10000];
-};
-typedef struct dados Dados;
+    int prox;
+} Dados;
 
-// Definição do nó da lista encadeada
-typedef struct No {
-    Dados dados;
-    struct No* prox;
-} No;
-
-void LerArquivo();
 void AbrirArquivo();
 void FecharArquivo();
-void GravarArquivo();
-void Inicializar(Dados H[]);
+void GravarArquivo(Dados D);
+void InicializarH();
 int HashString(char str[]);
-int Hash(int chave);
-void Inserir(Dados H[], Dados P);
-Dados* Busca(char Chave[]);
+void InserirH(Dados D);
+Dados Buscar(char Chave[]);
 void Imprimir(Dados D);
-//void TelaPesquisa();
-/* title, appeared, type, rank, numberOfUsers, creators, website, originCommunity
- * country, reference, wikipedia.summary */
+void LerArquivo();
 
 #endif //CODE_WIKI_DADOS_H
