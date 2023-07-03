@@ -4,8 +4,8 @@
 #include "dados.h"
 #include "interface.h"
 
-//Dados H[TAM];
 FILE *fp;
+int HashAcessos;
 
 void AbrirArquivo() {
     Dados Dado;
@@ -65,8 +65,10 @@ Dados Buscar(char Chave[]){
     Dados dados;
     int id = HashString(Chave);
     int pos = id * sizeof(Dados);
+    HashAcessos = 0;
     fseek(fp, pos, SEEK_SET);
     while(fread(&dados, sizeof(Dados), 1, fp)  ) { // Lê o ponteiro da lista encadeada correspondente à posição hash
+        HashAcessos++;
         if (strncmp(dados.Title, Chave, strlen(Chave)) == 0) {
             return dados;
         }
@@ -124,8 +126,29 @@ void Imprimir(Dados D) {
         Selecao(4, 14, 112, 10, Opcoes, ContOpcoes);
         GotoXY(16, 26);
         escolha = Menu(opcoes, x, y, escolha, 2);
-        if(escolha == 2) BuscaBinaria(D.Rank);
+        if(escolha == 0) {
+            TelaBBinaria(D.Rank);
+            break;
+        }
     } while(escolha != 1);
+}
+
+void TelaBBinaria(int chave) {
+    Borda(0, 0, 118, 28, 1, 0);
+    GotoXY(24, 1); printf("  _   _           _                   ____  _                  _       ");
+    GotoXY(24, 2); printf(" | | | | __ _ ___| |__   __   _____  | __ )(_)_ __   __ _ _ __(_) __ _ ");
+    GotoXY(24, 3); printf(" | |_| |/ _` / __| '_ \\  \\ \\ / / __| |  _ \\| | '_ \\ / _` | '__| |/ _` |");
+    GotoXY(24, 4); printf(" |  _  | (_| \\__ \\ | | |  \\ V /\\__ \\ | |_) | | | | | (_| | |  | | (_| |");
+    GotoXY(24, 5); printf(" |_| |_|\\__,_|___/_| |_|   \\_/ |___/ |____/|_|_| |_|\\__,_|_|  |_|\\__,_|");
+    Borda(15, 25, 90, 2, 0,0);
+    GotoXY(14, 13); printf("Quantidade de Acessos:");
+    GotoXY(84, 13); printf("Quantidade de Acessos:");
+    Borda(12, 14, 25, 2, 0,0);
+    Borda(82, 14, 25, 2, 0,0);
+    GotoXY(20, 15); printf("%d Acessos", HashAcessos);
+    GotoXY(90, 15); printf("%d Acessos", 0 /*BuscaBinaria(chave)*/);
+    GotoXY(20, 10);
+    GotoXY(38, 26); system("PAUSE");
 }
 
 void LerArquivo() {
