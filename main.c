@@ -36,7 +36,7 @@ int main() {
     char Title[51];
     Dados D;
     AbrirArquivo();
-    //LerArquivo(); // DEIXAR SEM COMENTÁRIO A PRIMEIRA VEZ QUE FOR RODAR, DEPOIS COMENTAR NOVAMENTE.
+    LerArquivo(); // DEIXAR SEM COMENTÁRIO A PRIMEIRA VEZ QUE FOR RODAR, DEPOIS COMENTAR NOVAMENTE.
     do {
         TelaPrincipal();
         GotoXY(26, 24); scanf(" %[^\n]", Title);
