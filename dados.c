@@ -6,7 +6,6 @@
 
 FILE *fp;
 int HashAcessos;
-int D[4817];
 
 void AbrirArquivo() {
     Dados Dado;
@@ -68,17 +67,17 @@ Dados Buscar(char Chave[]){
     int pos = id * sizeof(Dados);
     HashAcessos = 0;
     fseek(fp, pos, SEEK_SET);
-    while(fread(&dados, sizeof(Dados), 1, fp)  ) { // Lê o ponteiro da lista encadeada correspondente à posição hash
+    while(fread(&dados, sizeof(Dados), 1, fp)  ) {
         HashAcessos++;
         if (strncmp(dados.Title, Chave, strlen(Chave)) == 0) {
             return dados;
         }
-        pos = dados.prox; // Avança para o próximo nó da lista
+        pos = dados.prox;
         if(pos == 0) break;
         fseek(fp, pos, SEEK_SET);
     }
     strcpy(dados.Title, "");
-    return dados; // Title vazio se não encontrou.
+    return dados;
 }
 
 int HashString(char str[]) {
@@ -97,7 +96,6 @@ void Imprimir(Dados D) {
     int ContOpcoes = 0, escolha = 0;
     do {
         Borda(0, 0, 118, 28, 1, 0);
-        //Borda(15, 25, 90, 2, 0, 0);
         Borda(30, 1, 60, 2, 0, 0);
         Borda(18, 25, 25, 2, 0,0);
         Borda(75, 25, 25, 2, 0,0);
@@ -147,77 +145,31 @@ void TelaBBinaria(int chave) {
     Borda(12, 14, 25, 2, 0,0);
     Borda(82, 14, 25, 2, 0,0);
     GotoXY(20, 15); printf("%d Acessos", HashAcessos);
-    GotoXY(90, 15); printf("%d Acessos", AcessoBinaria(4817, chave));
+    GotoXY(90, 15); printf("%d Acessos", BuscaBinaria(4818, chave));
     GotoXY(20, 10);
     GotoXY(38, 26); system("PAUSE");
 }
 
-/*int BuscaBinaria(int v[], int n, int x){
-    int ini = 0, fim = n-1;
-    while(ini <= fim){
-        int meio = (ini + meio) / 2;
-        if(x < v[meio]) fim = meio - 1;
-        else if(x > v[meio]) ini = meio + 1;
-        else return meio;
+int BuscaBinaria(int n, int x){
+    int v[4818];
+    for (int i = 0; i < 4818; i++){
+        v[i] = i;
     }
-    return -1;
-}*/
-
-int AcessoBinaria(int n, int x){
-    SalvarRank();
-    int ini = 0, fim = n-1, cont = 1;
+    int meio, ini = 0, fim = n-1, cont = 1;
     while(ini <= fim){
-        int meio = (ini + meio) / 2;
-        if(x < D[meio]){
+        meio = (ini + fim) / 2;
+        if(x < v[meio]){
             fim = meio - 1;
             cont++;
         }
-        else if(x > D[meio]) {
+        else if(x > v[meio]) {
             ini = meio + 1;
             cont++;
         }
         else return cont;
     }
+    return -1;
 }
-
-/*int BuscaBinaria(Dados D[], int n, char showId[])
-{
-    int ini = 0, fim = n - 1, meio, acessos = 0;
-    while (ini <= fim)
-    {
-        acessos++;
-        meio = (ini + fim) / 2;
-
-        int comparacao = strcmp(showId, D[meio].Rank);
-
-        if (comparacao > 0)
-            ini = meio + 1;
-        else if (comparacao < 0)
-            fim = meio - 1;
-        else
-        {
-            printf("Acessos: %d\n", acessos);
-            return meio;
-        }
-    }
-
-    //printf("Acessos: %d\n", acessos);
-    return acessos;
-}*/
-
-/*int AcessoBiQuant(int rank){
-    Dados D;
-    int v[4817], i = 0, cont = 0;
-    FILE *fp = fopen("pldb.csv", "rb");
-    fseek(fp, 0, SEEK_SET);
-    while (fread(&D, sizeof(Dados), 1, fp)){
-        v[i] = D.Rank;
-        i++;
-    }
-    cont = AcessoBinaria(D, 4817, rank);
-    fclose(fp);
-    return cont;
-}*/
 
 void LerArquivo() {
     char linha[100000], texto[100000];
@@ -286,46 +238,6 @@ void LerArquivo() {
             campo++;
         }
         GravarArquivo(LD);
-        i++;
-    }
-    fclose (fporigin);
-}
-
-void SalvarRank() {
-    char linha[100000], texto[100000];
-    int campo = 0, i = 0, j, tam, t, a, aspas;
-    FILE *fporigin = fopen("pldb.csv", "r");
-    if(fporigin == NULL) {
-        printf("Nao abriu pldb.csv\n");
-        exit(1);
-    }
-    fscanf (fporigin, " %[^\n]", linha);
-    while (fscanf (fporigin, " %[^\n]", linha)!=EOF) {
-        memset(&D, 0, sizeof(Dados));
-        campo = 0;
-        texto[0] = 0;
-        tam = strlen(linha);
-        for(t = 0; t < tam; t++) {
-            a = 0;
-            aspas = 0;
-            while(linha[t] != ',' && t < tam) {
-                texto[a++] = linha[t++];
-                if(t > 0 && linha[t-1] == '\"') {
-                    a--;
-                    while(linha[t] != '\"' && t < tam) {
-                        texto[a++] = linha[t++];
-                    }
-                    t++;
-                }
-            }
-            texto[a++] = 0;
-            switch(campo) {
-                case 4:
-                    D[i] = atoi (texto);
-                    break;
-            }
-            campo++;
-        }
         i++;
     }
     fclose (fporigin);
