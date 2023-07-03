@@ -45,7 +45,7 @@ int main() {
         if(strcmp(D.Title, "") == 0) {
             Borda(13, 8, 91, 10, 1, 0);
             Borda(28, 9, 60, 2, 0, 0);
-            GotoXY(48, 10); printf("VALOR NAO ENCONTRADO!!!");
+            GotoXY(52, 10); printf("NAO ENCONTRADO!");
             GotoXY(36, 15); system("PAUSE");
         } else {
             Imprimir(D);
