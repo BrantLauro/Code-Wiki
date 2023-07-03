@@ -22,9 +22,12 @@ void FecharArquivo();
 void GravarArquivo(Dados D);
 int HashString(char str[]);
 Dados Buscar(char Chave[]);
-Dados BuscaBinaria(int chave);
+//Dados BuscaBinaria(int chave);
 void TelaBBinaria();
 void Imprimir(Dados D);
 void LerArquivo();
+int AcessoBiQuant(int id);
+int AcessoBinaria(int n, int x);
+void SalvarRank();
 
 #endif //CODE_WIKI_DADOS_H
