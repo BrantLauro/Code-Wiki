@@ -20,14 +20,11 @@ typedef struct dados {
 void AbrirArquivo();
 void FecharArquivo();
 void GravarArquivo(Dados D);
-int HashString(char str[]);
 Dados Buscar(char Chave[]);
-int BuscaBinaria(int n, int chave);
-void TelaBBinaria();
+int HashString(char str[]);
 void Imprimir(Dados D);
+void TelaBBinaria(int chave);
+int BuscaBinaria(int n, int chave);
 void LerArquivo();
-int AcessoBiQuant(int id);
-int AcessoBinaria(int n, int x);
-void SalvarRank();
 
 #endif //CODE_WIKI_DADOS_H
