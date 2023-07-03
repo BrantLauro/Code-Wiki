@@ -22,6 +22,7 @@ void FecharArquivo();
 void GravarArquivo(Dados D);
 int HashString(char str[]);
 Dados Buscar(char Chave[]);
+Dados BuscaBinaria(int chave);
 void Imprimir(Dados D);
 void LerArquivo();
 

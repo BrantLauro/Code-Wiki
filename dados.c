@@ -87,30 +87,45 @@ int HashString(char str[]) {
 }
 
 void Imprimir(Dados D) {
+    char opcoes[][51] = {"Busca Binaria","Fechar" };
+    int x[] = {24, 85};
+    int y[] = {26, 26};
     char buffer[1000000]; char *p; char *b; char *Opcoes[100];
-    int ContOpcoes = 0;
-    Borda(0, 0, 118, 28, 1, 0);
-    Borda(15, 25, 90, 2, 0,0);
-    Borda(30, 1, 60, 2, 0, 0);
-    GotoXY(55, 2); printf("Resultado:");
-    Borda(3, 4, 112, 2, 0, 0);
-    GotoXY(4, 5); printf("Titulo: %s\t\tType: %s\t\tYear: %d\t\tRank: %d\t\tUsers: %d", D.Title, D.Type, D.Year, D.Rank, D.Users);
-    Borda(3, 7, 112, 2, 0, 0);
-    GotoXY(4, 8); printf("Criador: %s\t\tOrigem: %s\t\tPais: %s", D.Creator, D.Origin, D.Country);
-    Borda(3, 10, 112, 2, 0, 0);
-    GotoXY(4, 11); printf("Site: %s", D.Website);
-    GotoXY(45, 11); printf("Refer.: %s", D.Reference);
-    Borda(3, 13, 112, 11, 0, 0);
-    b = word_wrap (buffer, D.Summary, 112);
-    p = strtok(buffer, "\n");
-    for(int i = 0; p != NULL; i++){
-        GotoXY(4, 14 + i);
-        Opcoes[ContOpcoes++] = p;
-        p = strtok(NULL, "\n");
-    }
-    Selecao(4, 14, 112, 10, Opcoes, ContOpcoes);
-    GotoXY(16, 26);
-    system("PAUSE");
+    int ContOpcoes = 0, escolha = 0;
+    do {
+        Borda(0, 0, 118, 28, 1, 0);
+        //Borda(15, 25, 90, 2, 0, 0);
+        Borda(30, 1, 60, 2, 0, 0);
+        Borda(18, 25, 25, 2, 0,0);
+        Borda(75, 25, 25, 2, 0,0);
+        GotoXY(55, 2);
+        printf("Resultado:");
+        Borda(3, 4, 112, 2, 0, 0);
+        GotoXY(4, 5);
+        printf("Titulo: %s\t\tType: %s\t\tYear: %d\t\tRank: %d\t\tUsers: %d", D.Title, D.Type, D.Year, D.Rank, D.Users);
+        Borda(3, 7, 112, 2, 0, 0);
+        GotoXY(4, 8);
+        printf("Criador: %s\t\tOrigem: %s\t\tPais: %s", D.Creator, D.Origin, D.Country);
+        Borda(3, 10, 112, 2, 0, 0);
+        GotoXY(4, 11);
+        printf("Site: %s", D.Website);
+        GotoXY(45, 11);
+        printf("Refer.: %s", D.Reference);
+        GotoXY(85, 26); printf("Fechar");
+        GotoXY(24, 26); printf("Busca Binaria");
+        Borda(3, 13, 112, 11, 0, 0);
+        b = word_wrap(buffer, D.Summary, 112);
+        p = strtok(buffer, "\n");
+        for (int i = 0; p != NULL; i++) {
+            GotoXY(4, 14 + i);
+            Opcoes[ContOpcoes++] = p;
+            p = strtok(NULL, "\n");
+        }
+        Selecao(4, 14, 112, 10, Opcoes, ContOpcoes);
+        GotoXY(16, 26);
+        escolha = Menu(opcoes, x, y, escolha, 2);
+        if(escolha == 2) BuscaBinaria(D.Rank);
+    } while(escolha != 1);
 }
 
 void LerArquivo() {
