@@ -140,8 +140,8 @@ void TelaBBinaria(int chave) {
     GotoXY(24, 4); printf(" |  _  | (_| \\__ \\ | | |  \\ V /\\__ \\ | |_) | | | | | (_| | |  | | (_| |");
     GotoXY(24, 5); printf(" |_| |_|\\__,_|___/_| |_|   \\_/ |___/ |____/|_|_| |_|\\__,_|_|  |_|\\__,_|");
     Borda(15, 25, 90, 2, 0,0);
-    GotoXY(14, 13); printf("Quantidade de Acessos:");
-    GotoXY(84, 13); printf("Quantidade de Acessos:");
+    GotoXY(12, 13); printf("Quantidade de Acessos Hash:");
+    GotoXY(78, 13); printf("Quantidade de Acessos Busca Binaria:");
     Borda(12, 14, 25, 2, 0,0);
     Borda(82, 14, 25, 2, 0,0);
     GotoXY(20, 15); printf("%d Acessos", HashAcessos);
